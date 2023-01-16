@@ -1,5 +1,5 @@
 import { join } from 'path';
-const {ZebrunnerReporter, ZebrunnerService} = require('javascript-agent-webdriverio');
+const {ZebrunnerReporter, ZebrunnerService} = require('javascript-agent-wdio');
 
 exports.config = {
     runner: 'local',
