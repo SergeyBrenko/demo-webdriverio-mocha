@@ -1,4 +1,5 @@
 import { join } from 'path';
+const {ZebrunnerReporter, ZebrunnerService} = require('javascript-agent-webdriverio');
 
 exports.config = {
     runner: 'local',
@@ -25,6 +26,10 @@ exports.config = {
         timeout: 30000,
     },
     reporters: [
+        [
+            ZebrunnerReporter, 
+            {}
+        ],
         'spec',
         [
             'allure',
@@ -37,27 +42,8 @@ exports.config = {
     ],
     services: [
         [
-            'image-comparison',
-            {
-                baselineFolder: join(process.cwd(), './screenshots/reference/'),
-                formatImageName: '{tag}-{logName}-{width}x{height}',
-                screenshotPath: join(process.cwd(), './screenshots/'),
-                savePerInstance: true,
-                autoSaveBaseline: true,
-                blockOutStatusBar: true,
-                blockOutToolBar: true,
-            },
-        ],
-        ['chromedriver'],
-        [
-            'performancetotal',
-            {
-                disableAppendToExistingFile: false,
-                performanceResultsFileName: `performance-results_${new Date().getTime()}`,
-                dropResultsFromFailedTest: false,
-                performanceResultsDirectory: 'test-report/performance-results',
-            },
-        ],
+            ZebrunnerService
+        ]
     ],
     autoCompileOpts: {
         autoCompile: true,
